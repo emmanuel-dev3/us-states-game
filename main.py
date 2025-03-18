@@ -11,16 +11,13 @@ turtle.shape(image)
 data = pandas.read_csv("50_states.csv")
 all_states = data["state"].values
 guessed_states = []
-missing_states = []
 game_on = True
 
 while game_on:
     answer_state = screen.textinput(title=f"{len(guessed_states)}/{len(all_states)} States Correct", prompt="What's another state name?").title()
     if answer_state == "Exit":
         game_on = False
-        for state in all_states:
-            if state not in guessed_states:
-                missing_states.append(state)
+        missing_states = [state for state in all_states if state not in guessed_states]
         states_to_learn_dict = {
             "state": missing_states
         }
